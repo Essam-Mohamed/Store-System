@@ -1,0 +1,17 @@
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\bin\Debug\Store System.exe.config
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\bin\Debug\Store System.exe
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\bin\Debug\Store System.pdb
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\bin\Debug\EntityFramework.dll
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\bin\Debug\EntityFramework.SqlServer.dll
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\bin\Debug\EntityFramework.xml
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\bin\Debug\EntityFramework.SqlServer.xml
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store System.csproj.AssemblyReference.cache
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store System.csproj.SuggestedBindingRedirects.cache
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store_System.Form1.resources
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store_System.Form2.resources
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store_System.Properties.Resources.resources
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store System.csproj.GenerateResource.cache
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store System.csproj.CoreCompileInputs.cache
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store System.csproj.CopyComplete
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store System.exe
+H:\E\Programming\9-Month Scholarship Program PD (ITI)\5- Projects\EF\Store System\obj\Debug\Store System.pdb

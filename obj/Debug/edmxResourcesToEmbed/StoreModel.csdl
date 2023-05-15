@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Exchange_Permit" Relationship="Self.FK_export_Customer" FromRole="Customer" ToRole="Exchange_Permit" />
+  </EntityType>
+  <EntityType Name="Exchange_Permit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int32" />
+    <Property Name="Storage_Id" Type="Int32" />
+    <Property Name="Customer_Id" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_export_Customer" FromRole="Exchange_Permit" ToRole="Customer" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_export_Product" FromRole="Exchange_Permit" ToRole="Product" />
+    <NavigationProperty Name="Store" Relationship="Self.FK_export_Store" FromRole="Exchange_Permit" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Exchange_Permit" Relationship="Self.FK_export_Product" FromRole="Product" ToRole="Exchange_Permit" />
+    <NavigationProperty Name="Supply_Permit" Relationship="Self.FK_import_Product" FromRole="Product" ToRole="Supply_Permit" />
+    <NavigationProperty Name="Stores" Relationship="Self.Product_Store" FromRole="Product" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Exchange_Permit" Relationship="Self.FK_export_Store" FromRole="Store" ToRole="Exchange_Permit" />
+    <NavigationProperty Name="Supply_Permit" Relationship="Self.FK_import_Store" FromRole="Store" ToRole="Supply_Permit" />
+    <NavigationProperty Name="Products" Relationship="Self.Product_Store" FromRole="Store" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Supply_Permit" Relationship="Self.FK_import_Supplier" FromRole="Supplier" ToRole="Supply_Permit" />
+  </EntityType>
+  <EntityType Name="Supply_Permit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int32" />
+    <Property Name="Storage_Id" Type="Int32" />
+    <Property Name="Supplier_Id" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Production_Date" Type="DateTime" Precision="0" />
+    <Property Name="Expiration_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_import_Product" FromRole="Supply_Permit" ToRole="Product" />
+    <NavigationProperty Name="Store" Relationship="Self.FK_import_Store" FromRole="Supply_Permit" ToRole="Store" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_import_Supplier" FromRole="Supply_Permit" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_export_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Exchange_Permit" Type="Self.Exchange_Permit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exchange_Permit">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_export_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Exchange_Permit" Type="Self.Exchange_Permit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exchange_Permit">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_export_Store">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Exchange_Permit" Type="Self.Exchange_Permit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Exchange_Permit">
+        <PropertyRef Name="Storage_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_import_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Supply_Permit" Type="Self.Supply_Permit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supply_Permit">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_import_Store">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Supply_Permit" Type="Self.Supply_Permit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supply_Permit">
+        <PropertyRef Name="Storage_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_import_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Supply_Permit" Type="Self.Supply_Permit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supply_Permit">
+        <PropertyRef Name="Supplier_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Product_Store">
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <End Role="Store" Type="Self.Store" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Store_SystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Exchange_Permit" EntityType="Self.Exchange_Permit" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Stores" EntityType="Self.Store" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="Supply_Permit" EntityType="Self.Supply_Permit" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_export_Customer" Association="Self.FK_export_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Exchange_Permit" EntitySet="Exchange_Permit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_export_Product" Association="Self.FK_export_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Exchange_Permit" EntitySet="Exchange_Permit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_export_Store" Association="Self.FK_export_Store">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Exchange_Permit" EntitySet="Exchange_Permit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_import_Product" Association="Self.FK_import_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Supply_Permit" EntitySet="Supply_Permit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_import_Store" Association="Self.FK_import_Store">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Supply_Permit" EntitySet="Supply_Permit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_import_Supplier" Association="Self.FK_import_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Supply_Permit" EntitySet="Supply_Permit" />
+    </AssociationSet>
+    <AssociationSet Name="Product_Store" Association="Self.Product_Store">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Store" EntitySet="Stores" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
